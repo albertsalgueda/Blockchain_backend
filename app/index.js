@@ -10,6 +10,9 @@ const app = express();
 
 const bc = new Blockchain();
 
+const P2pServer = require('./p2p-server');
+const p2pServer = new P2pServer(bc);
+
 app.use(bodyParser.json());
 
 // first endpoint of our API
@@ -27,3 +30,4 @@ app.post('/mine',(req,res)=>{
 }); 
 
 app.listen(HTTP_PORT, () => console.log(`Listening on port ${HTTP_PORT}`));
+p2pServer.listen();
