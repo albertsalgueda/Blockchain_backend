@@ -1,2 +1,0 @@
-const Block = require('./block');
-
