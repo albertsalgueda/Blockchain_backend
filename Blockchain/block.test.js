@@ -2,9 +2,11 @@
 const Block = require('./block');
 
 describe('Block',()=>{
+    
     let data 
     let lastBlock
     let block
+
     beforeEach(()=>{
         data = 'GID test';
         lastBlock = Block.genesis();
@@ -21,6 +23,16 @@ describe('Block',()=>{
         expect(block.lasthash).toEqual(lastBlock.hash)
     });
 
+    it('generates a hash that matches difficulty',()=>{
+        expect(block.hash.substring(0,block.difficulty)).toEqual('0'.repeat(block.difficulty));
+    });
 
+    it('lowers difficulty for slowly mined blocks',()=>{
+        expect(Block.adjustedDifficulty(block,block.timestamp+360000)).toEqual(block.difficulty-1);
+    });
+
+    it('it raises the difficulty for quickly mined bblocks',()=>{
+        expect(Block.adjustedDifficulty(block,block.timestamp+1)).toEqual(block.difficulty+1);
+    });
 
 }) 
