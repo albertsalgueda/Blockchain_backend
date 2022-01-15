@@ -1,16 +1,18 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const Blockchain = require('../blockchain');
+const P2pServer = require('./p2p-server');
+
 // We use process.env.http_port in case that local host 3001 is being used for another task
 // example: on the terminal we would run
 // $ HTTP_PORT = 3002 npm run dev
+
 const HTTP_PORT = process.env.HTTP_PORT || 3001;
 
 const app = express();
 
 const bc = new Blockchain();
 
-const P2pServer = require('./p2p-server');
 const p2pServer = new P2pServer(bc);
 
 app.use(bodyParser.json());
@@ -23,6 +25,7 @@ app.get('/blocks', (req,res)=>{
 
 //data of the block will be sent through the API in a JSON format
 //We'll create a new block with that data
+
 app.post('/mine',(req,res)=>{
     const block = bc.addBlock(req.body.data);
     console.log(`New block added: ${block.toString()}`);
