@@ -1,3 +1,5 @@
+//tests for the wallet class
+
 const Wallet = require('./index');
 const TransactionPool = require('./transaction-pool');
 

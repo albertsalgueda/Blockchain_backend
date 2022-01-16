@@ -26,6 +26,7 @@ class Blockchain {
     return true;
   }
   replaceChain(newChain){
+    //if(this.item === undefined) {return} 
     //CONDITION 1: new chain must be longer than current chain
     if (newChain.length <= this.chain.length){
         console.log('Received chain is not longer than current chain');
