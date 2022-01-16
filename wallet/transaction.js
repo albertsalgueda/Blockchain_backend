@@ -63,6 +63,7 @@ class Transaction {
       transaction.input.signature,
       ChainUtil.hash(transaction.outputs)
     );
+
   }
 }
 
