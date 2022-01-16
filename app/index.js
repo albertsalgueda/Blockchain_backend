@@ -51,7 +51,7 @@ app.post('/transact',(req,res)=>{
     //the user sends the data in their request
     const {recipient,amount} = req.body;
     //create the transaction
-    const transaction = wallet.createTransaction(recipient,amount,tp);
+    const transaction = wallet.createTransaction(recipient,amount,bc,tp);
     //broadcast the transaction across the network so that peers can add it to their transaction pool
     p2pServer.broadcastTransaction(transaction);
     //redirect the user to visualize the transactionn
