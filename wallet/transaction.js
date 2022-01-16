@@ -1,5 +1,5 @@
 const ChainUtil = require('../chain-util');
-//const { MINING_REWARD } = require('../config');
+const { MINING_REWARD } = require('../config');
 
 class Transaction {
   constructor() {
@@ -7,21 +7,21 @@ class Transaction {
     this.input = null;
     this.outputs = [];
   }
-//improve transaction efficiency
-  update(senderWallet, recipient, amount) {
-	const senderOutput = this.outputs.find(output => output.address === senderWallet.publicKey);
 
-  if (amount > senderOutput.amount) {
-    console.log(`Amount: ${amount} exceeds balance.`);
-    return;
+  update(senderWallet, recipient, amount) {
+    const senderOutput = this.outputs.find(output => output.address === senderWallet.publicKey);
+
+    if (amount > senderOutput.amount) {
+      console.log(`Amount: ${amount} exceeds balance.`);
+      return;
     }
 
-  senderOutput.amount = senderOutput.amount - amount;
-  this.outputs.push({ amount, address: recipient });
-  Transaction.signTransaction(this, senderWallet);
+    senderOutput.amount = senderOutput.amount - amount;
+    this.outputs.push({ amount, address: recipient });
+    Transaction.signTransaction(this, senderWallet);
 
-  return this;
- }
+    return this;
+  }
 
   static transactionWithOutputs(senderWallet, outputs) {
     const transaction = new this();

@@ -1,6 +1,6 @@
 const chainUtil = require('../chain-util')
 //const SHA256 = require('crypto-js/sha256');
-const {DIFFICULTY, mineRate} = require('../config');
+const {DIFFICULTY, MINE_RATE} = require('../config');
 //creem la classe del block. 
 class Block {
     //definim la funció constructura i els parameters de creació del block 
@@ -56,7 +56,7 @@ class Block {
 
     static adjustedDifficulty(lastBlock, currentTime){
         let {difficulty} = lastBlock;
-        difficulty = lastBlock.timestamp + mineRate > currentTime ? difficulty + 1 : difficulty -1;
+        difficulty = lastBlock.timestamp + MINE_RATE > currentTime ? difficulty + 1 : difficulty -1;
         return difficulty;
     }
 
