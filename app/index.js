@@ -70,5 +70,9 @@ app.get('/mine', (req,res)=>{
     res.redirect('/blocks');
 });
 
+app.get('/balance', (req,res)=>{
+    res.json(wallet.calculateBalance(bc));
+})
+
 app.listen(HTTP_PORT, () => console.log(`Listening on port ${HTTP_PORT}`));
 p2pServer.listen();
